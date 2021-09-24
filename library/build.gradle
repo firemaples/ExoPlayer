@@ -14,7 +14,8 @@ import com.android.builder.core.BuilderConstants
 // See the License for the specific language governing permissions and
 // limitations under the License.
 apply plugin: 'com.android.library'
-apply plugin: 'bintray-release'
+//apply plugin: 'bintray-release'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -91,12 +92,34 @@ android.libraryVariants.all { variant ->
     }
 }
 
-publish {
-    artifactId = 'exoplayer'
-    description = 'The ExoPlayer library.'
-    repoName = releaseRepoName
-    userOrg = releaseUserOrg
-    groupId = releaseGroupId
-    version = releaseVersion
-    website = releaseWebsite
+//publish {
+//    artifactId = 'exoplayer'
+//    description = 'The ExoPlayer library.'
+//    repoName = releaseRepoName
+//    userOrg = releaseUserOrg
+//    groupId = releaseGroupId
+//    version = releaseVersion
+//    website = releaseWebsite
+//}
+
+// usage:
+// ./gradlew clean library:assemble library:publish
+publishing {
+    repositories {
+        maven {
+            // change to point to your repo, e.g. http://my.org/repo
+//                url = layout.buildDirectory.dir('repo')
+            println("Publish to file:${System.getenv('CUSTOM_LOCAL_MAVEN')}")
+            url = "file:${System.getenv('CUSTOM_LOCAL_MAVEN')}"
+        }
+    }
+    publications {
+        mavenAar(MavenPublication) {
+            groupId = releaseGroupId
+            artifactId = 'exoplayer'
+            version = releaseVersion
+
+            artifact("$buildDir/outputs/aar/${project.name}-release.aar")
+        }
+    }
 }

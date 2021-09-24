@@ -37,9 +37,15 @@ android {
         abortOnError false
     }
 
+    flavorDimensions "tier"
+
     productFlavors {
-        demo
-        demoExt
+        demo {
+            dimension "tier"
+        }
+        demoExt {
+            dimension "tier"
+        }
     }
 }
 

@@ -12,7 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 apply plugin: 'com.android.library'
-apply plugin: 'bintray-release'
+//apply plugin: 'bintray-release'
+apply plugin: 'maven-publish'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -42,12 +43,12 @@ dependencies {
     }
 }
 
-publish {
-    artifactId = 'extension-okhttp'
-    description = 'An OkHttp extension for ExoPlayer.'
-    repoName = releaseRepoName
-    userOrg = releaseUserOrg
-    groupId = releaseGroupId
-    version = releaseVersion
-    website = releaseWebsite
-}
+//publish {
+//    artifactId = 'extension-okhttp'
+//    description = 'An OkHttp extension for ExoPlayer.'
+//    repoName = releaseRepoName
+//    userOrg = releaseUserOrg
+//    groupId = releaseGroupId
+//    version = releaseVersion
+//    website = releaseWebsite
+//}
